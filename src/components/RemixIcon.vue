@@ -6,10 +6,21 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <template v-if="icon === IconTypes.menu">
-      <path fill="transparent" d="M0 0h24v24H0z" />
       <path
         fill="currentColor"
         d="M3 4h18v2H3V4zm6 7h12v2H9v-2zm-6 7h18v2H3v-2z"
+      />
+    </template>
+    <template v-if="icon === IconTypes.star">
+      <path
+        v-if="!fill"
+        fill="currentColor"
+        d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928L12 18.26zm0-2.292l4.247 2.377-.949-4.773 3.573-3.305-4.833-.573L12 5.275l-2.038 4.42-4.833.572 3.573 3.305-.949 4.773L12 15.968z"
+      />
+      <path
+        v-if="fill"
+        fill="currentColor"
+        d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z"
       />
     </template>
   </svg>
@@ -21,7 +32,8 @@ import { IconTypes } from "@/declarations/IconTypes";
 
 @Component
 export default class RemixIcon extends Vue {
-  @Prop() icon!: IconTypes;
+  @Prop({ required: true }) icon!: IconTypes;
+  @Prop() fill!: boolean;
 
   IconTypes = IconTypes;
 }
