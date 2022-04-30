@@ -1,7 +1,9 @@
 <template>
   <header class="px-4 py-6 flex justify-between items-center relative">
     <h1 class="font-bold text-lg">
-      <span class="text-lime-600">Tag</span>Mark
+      <router-link to="/">
+        <span class="text-lime-600">Tag</span>Mark
+      </router-link>
     </h1>
     <button @click="handleMenuState(true)">
       <remix-icon icon="menu" class="text-lime-600 cursor-pointer" />
