@@ -13,7 +13,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class PrimaryButton extends Vue {
-  @Prop() type = "button";
+  @Prop({ default: "button" }) type!: string;
 
   handleButtonClick() {
     this.$emit("click");
