@@ -7,13 +7,22 @@
     >
       {{ label }}
     </label>
-    <input :id="name" :name="name" v-if="!multiple" :class="sharedClasses" />
+    <input
+      v-if="!multiple"
+      :id="name"
+      :name="name"
+      :value="value"
+      :class="sharedClasses"
+      @input="handleChange"
+    />
     <textarea
       rows="4"
       v-if="multiple"
       :id="name"
       :name="name"
+      :value="value"
       :class="[sharedClasses, 'resize-none']"
+      @input="handleChange"
     />
   </div>
 </template>
@@ -24,11 +33,16 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class TextField extends Vue {
   @Prop({ required: true }) name!: string;
+  @Prop({ required: true }) value!: string;
   @Prop() label!: string;
   @Prop() multiple!: string;
 
   get sharedClasses() {
     return "block text-sm w-full py-2 px-3 border-2 border-gray-400 text-slate-800 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 bg-white focus:border-lime-600";
+  }
+
+  handleChange($event: Event) {
+    this.$emit("input", ($event.target as HTMLInputElement).value);
   }
 }
 </script>
