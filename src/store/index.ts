@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import tag from "./tag";
+import card from "./card";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    tag,
+    card,
   },
 });

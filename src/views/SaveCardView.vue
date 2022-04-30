@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title h="h2">Create new tag</page-title>
+    <page-title h="h2">Create new Card</page-title>
     <form @submit.prevent="handleSubmit">
       <text-field v-model="values.name" name="name" label="Name" />
       <text-field
@@ -22,9 +22,9 @@ import { ActionMethod } from "vuex";
 import PageTitle from "@/components/PageTitle.vue";
 import TextField from "@/components/TextField.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
-import { Tag } from "@/declarations/Tag";
+import { Card } from "@/declarations/Card";
 
-const TagModule = namespace("tag");
+const CardModule = namespace("card");
 
 @Component({
   components: {
@@ -33,17 +33,17 @@ const TagModule = namespace("tag");
     PrimaryButton,
   },
 })
-export default class SaveTagView extends Vue {
-  @TagModule.Action("setTag") actionSetTag!: ActionMethod;
+export default class SaveCardView extends Vue {
+  @CardModule.Action("setCard") actionSetCard!: ActionMethod;
 
-  values: Omit<Tag, "id"> = {
+  values: Omit<Card, "id"> = {
     name: "",
     description: "",
     link: "",
   };
 
   handleSubmit() {
-    this.actionSetTag(this.values);
+    this.actionSetCard(this.values);
   }
 }
 </script>

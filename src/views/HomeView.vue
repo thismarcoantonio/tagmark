@@ -2,13 +2,13 @@
   <div class="home">
     <search-box />
     <div class="grid gap-4 mt-8">
-      <tag-card
-        :tag="tag"
-        :key="tag.id"
-        v-for="tag in tags"
+      <card-item
+        :card="card"
+        :key="card.id"
+        v-for="card in cards"
         @toggle-favorite="handleFavorite"
         :favorite="true"
-        :categories="[
+        :tags="[
           { id: '1', name: 'React' },
           { id: '2', name: 'Vue' },
         ]"
@@ -20,20 +20,20 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { namespace } from "vuex-class";
-import { Tag } from "@/declarations/Tag";
+import { Card } from "@/declarations/Card";
 import SearchBox from "@/components/SearchBox.vue";
-import TagCard from "@/components/TagCard.vue";
+import CardItem from "@/components/CardItem.vue";
 
-const TagModule = namespace("tag");
+const CardModule = namespace("card");
 
 @Component({
   components: {
     SearchBox,
-    TagCard,
+    CardItem,
   },
 })
 export default class HomeView extends Vue {
-  @TagModule.State("tags") tags!: Tag[];
+  @CardModule.State("cards") cards!: Card[];
 
   handleFavorite($event: { id: string }) {
     console.log($event);

@@ -57,7 +57,7 @@ export default class MainMenu extends Vue {
   get menuRoutes() {
     return [
       { to: "/", label: "Home" },
-      { to: "/new-tag", label: "Create new tag" },
+      { to: "/new-card", label: "Create new card" },
     ];
   }
 }

@@ -1,4 +1,4 @@
-export type Tag = {
+export type Card = {
   id: string;
   name: string;
   description: string;
