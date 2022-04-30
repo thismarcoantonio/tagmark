@@ -17,11 +17,14 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+import { ActionMethod } from "vuex";
 import PageTitle from "@/components/PageTitle.vue";
 import TextField from "@/components/TextField.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
-import { createTag } from "@/services/tag";
 import { Tag } from "@/declarations/Tag";
+
+const TagModule = namespace("tag");
 
 @Component({
   components: {
@@ -31,14 +34,16 @@ import { Tag } from "@/declarations/Tag";
   },
 })
 export default class SaveTagView extends Vue {
+  @TagModule.Action("setTag") actionSetTag!: ActionMethod;
+
   values: Omit<Tag, "id"> = {
     name: "",
     description: "",
     link: "",
   };
 
-  async handleSubmit() {
-    await createTag(this.values);
+  handleSubmit() {
+    this.actionSetTag(this.values);
   }
 }
 </script>
