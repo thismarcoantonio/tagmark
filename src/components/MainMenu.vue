@@ -58,6 +58,7 @@ export default class MainMenu extends Vue {
     return [
       { to: "/", label: "Home" },
       { to: "/new-card", label: "Create new card" },
+      { to: "/tags", label: "Manage tags" },
     ];
   }
 }
