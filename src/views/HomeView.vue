@@ -3,29 +3,12 @@
     <search-box />
     <div class="grid gap-4 mt-8">
       <tag-card
-        id="1"
-        title="Headless UI"
+        :tag="tag"
+        :key="tag.id"
+        v-for="tag in tags"
         @toggle-favorite="handleFavorite"
         :favorite="true"
-        :tags="[
-          { id: '1', name: 'React' },
-          { id: '2', name: 'Vue' },
-        ]"
-      />
-      <tag-card
-        id="2"
-        title="Headless UI 2"
-        @toggle-favorite="handleFavorite"
-        :tags="[
-          { id: '1', name: 'React 2' },
-          { id: '2', name: 'Vue 3' },
-        ]"
-      />
-      <tag-card
-        id="3"
-        title="Headless UI 3"
-        @toggle-favorite="handleFavorite"
-        :tags="[
+        :categories="[
           { id: '1', name: 'React' },
           { id: '2', name: 'Vue' },
         ]"
@@ -36,8 +19,12 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+import { Tag } from "@/declarations/Tag";
 import SearchBox from "@/components/SearchBox.vue";
 import TagCard from "@/components/TagCard.vue";
+
+const TagModule = namespace("tag");
 
 @Component({
   components: {
@@ -46,6 +33,8 @@ import TagCard from "@/components/TagCard.vue";
   },
 })
 export default class HomeView extends Vue {
+  @TagModule.State("tags") tags!: Tag[];
+
   handleFavorite($event: { id: string }) {
     console.log($event);
   }
