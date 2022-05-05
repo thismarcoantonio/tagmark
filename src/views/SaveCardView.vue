@@ -2,14 +2,20 @@
   <div>
     <page-title h="h2">Create new Card</page-title>
     <form @submit.prevent="handleSubmit">
-      <text-field v-model="values.name" name="name" label="Name" />
+      <text-field v-model="values.name" name="name" label="Name" class="mb-4" />
       <text-field
+        class="mb-4"
         :multiple="true"
         name="description"
         label="Description"
         v-model="values.description"
       />
-      <text-field v-model="values.link" name="link" label="Main link" />
+      <text-field
+        name="link"
+        class="mb-4"
+        label="Main link"
+        v-model="values.link"
+      />
       <primary-button type="submit">Submit</primary-button>
     </form>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <div>
     <label
       :for="name"
       v-if="label"
@@ -13,6 +13,7 @@
       :name="name"
       :value="value"
       :class="sharedClasses"
+      :placeholder="placeholder"
       @input="handleChange"
     />
     <textarea
@@ -21,6 +22,7 @@
       :id="name"
       :name="name"
       :value="value"
+      :placeholder="placeholder"
       :class="[sharedClasses, 'resize-none']"
       @input="handleChange"
     />
@@ -35,6 +37,7 @@ export default class TextField extends Vue {
   @Prop({ required: true }) name!: string;
   @Prop({ required: true }) value!: string;
   @Prop() label!: string;
+  @Prop() placeholder!: string;
   @Prop() multiple!: string;
 
   get sharedClasses() {
