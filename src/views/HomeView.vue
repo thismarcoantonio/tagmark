@@ -5,10 +5,10 @@
       <card-item
         :card="card"
         :key="card.id"
-        v-for="card in cards"
-        @toggle-favorite="handleFavorite"
-        :favorite="true"
+        :favorite="card.favorite"
         :tags="tags.filter((tag) => card.tags.includes(tag.id))"
+        @toggle-favorite="handleFavorite(card)"
+        v-for="card in cards"
       />
     </div>
   </div>
@@ -16,11 +16,12 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { State } from "vuex-class";
+import { Action, State } from "vuex-class";
 import { Tag } from "@/declarations/Tag";
 import { Card } from "@/declarations/Card";
 import SearchBox from "@/components/SearchBox.vue";
 import CardItem from "@/components/CardItem.vue";
+import { ActionMethod } from "vuex";
 
 @Component({
   components: {
@@ -32,8 +33,11 @@ export default class HomeView extends Vue {
   @State("cards", { namespace: "card" }) cards!: Card[];
   @State("tags", { namespace: "tag" }) tags!: Tag[];
 
-  handleFavorite($event: { id: string }) {
-    console.log($event);
+  @Action("setFavorite", { namespace: "card" })
+  setFavorite!: ActionMethod;
+
+  handleFavorite({ id, favorite }: { id: string; favorite: boolean }) {
+    this.setFavorite({ id, favorite: !favorite });
   }
 }
 </script>

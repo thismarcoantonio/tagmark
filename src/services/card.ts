@@ -25,3 +25,25 @@ export function createCard(data: Omit<Card, "id">): Promise<Card> {
     }, 2000);
   });
 }
+
+export function updateCard({
+  id,
+  ...data
+}: { id: string } & Partial<Omit<Card, "id">>): Promise<Card[]> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const cards = getCards();
+        const updatedCards = cards.map((card) =>
+          card.id === id ? { ...card, ...data } : card
+        );
+        setItem<Card[]>(STORAGE_KEY, updatedCards);
+        resolve(updatedCards);
+      } catch (error) {
+        return reject(
+          "An error ocurred trying to update your card, try again later"
+        );
+      }
+    }, 2000);
+  });
+}

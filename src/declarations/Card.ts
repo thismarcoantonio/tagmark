@@ -6,4 +6,5 @@ export type Card = {
   description: string;
   link: string;
   tags: Tag["id"][];
+  favorite?: boolean;
 };
