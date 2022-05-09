@@ -16,6 +16,13 @@
         label="Main link"
         v-model="values.link"
       />
+      <select-field
+        class="mb-4"
+        label="Tags"
+        name="tags"
+        v-model="values.tags"
+        :options="tags.map((tag) => ({ label: tag.name, value: tag.id }))"
+      />
       <primary-button type="submit">Submit</primary-button>
     </form>
   </div>
@@ -23,33 +30,44 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { namespace } from "vuex-class";
+import { State, Action } from "vuex-class";
 import { ActionMethod } from "vuex";
+import { Tag } from "@/declarations/Tag";
+import { Card } from "@/declarations/Card";
 import PageTitle from "@/components/PageTitle.vue";
 import TextField from "@/components/TextField.vue";
+import SelectField from "@/components/SelectField.vue";
 import PrimaryButton from "@/components/PrimaryButton.vue";
-import { Card } from "@/declarations/Card";
-
-const CardModule = namespace("card");
 
 @Component({
   components: {
     PageTitle,
     TextField,
+    SelectField,
     PrimaryButton,
   },
 })
 export default class SaveCardView extends Vue {
-  @CardModule.Action("setCard") actionSetCard!: ActionMethod;
+  @State("tags", { namespace: "tag" })
+  tags!: Tag[];
 
-  values: Omit<Card, "id"> = {
+  @Action("setCard", { namespace: "card" })
+  actionSetCard!: ActionMethod;
+
+  values: Pick<Card, "name" | "description" | "link"> & {
+    tags: { label: string; value: string }[];
+  } = {
     name: "",
     description: "",
     link: "",
+    tags: [],
   };
 
   handleSubmit() {
-    this.actionSetCard(this.values);
+    this.actionSetCard({
+      ...this.values,
+      tags: this.values.tags.map((tag) => tag.value),
+    });
   }
 }
 </script>
