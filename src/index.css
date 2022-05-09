@@ -18,3 +18,30 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
+
+.select-field .vs__dropdown-toggle {
+  @apply w-full p-0 border-2 border-gray-400 text-slate-800 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 bg-white focus:border-lime-600;
+}
+.select-field .vs__selected-options {
+  @apply p-0;
+}
+.select-field .vs__search {
+  @apply m-0 text-sm py-2 px-3 border-0;
+}
+.select-field .vs__selected {
+  @apply m-1;
+}
+.select-field .vs__deselect {
+  @apply ml-2;
+}
+.select-field .vs__dropdown-menu {
+  border: 1px solid;
+  border-top-style: solid;
+  @apply rounded border shadow-md mt-1 border-gray-400;
+}
+.select-field .vs__dropdown-option {
+  @apply py-2 px-4 text-base text-slate-700;
+}
+.select-field .vs__dropdown-option--highlight {
+  @apply bg-green-200 text-slate-700;
+}

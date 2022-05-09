@@ -40,6 +40,11 @@
         d="M7 19v-6h10v6h2V7.828L16.172 5H5v14h2zM4 3h13l4 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm5 12v4h6v-4H9z"
       />
     </template>
+    <template v-if="icon === IconTypes['chevron-down']">
+      <path
+        d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"
+      />
+    </template>
   </svg>
 </template>
 

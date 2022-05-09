@@ -4,4 +4,5 @@ export enum IconTypes {
   close = "close",
   edit = "edit",
   save = "save",
+  "chevron-down" = "chevron-down",
 }
