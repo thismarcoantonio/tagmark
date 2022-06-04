@@ -1,4 +1,8 @@
-# tagmark
+# Tagmark
+
+Vue application to save your bookmarks categorized by tags
+
+---
 
 ## Project setup
 
