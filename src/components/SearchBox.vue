@@ -4,7 +4,7 @@
       :class="{ 'opacity-0 translate-x-1': value }"
       class="absolute pointer-events-none transition duration-200 text-gray-400 left-2 select-none"
     >
-      Search a word or a tag
+      Search by title or a tag
     </label>
     <input
       type="search"
