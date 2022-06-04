@@ -14,6 +14,7 @@
       :value="value"
       :class="sharedClasses"
       :placeholder="placeholder"
+      :autocomplete="autoComplete ? 'on' : 'off'"
       @input="handleChange"
     />
     <textarea
@@ -39,6 +40,7 @@ export default class TextField extends Vue {
   @Prop() label!: string;
   @Prop() placeholder!: string;
   @Prop() multiple!: string;
+  @Prop() autoComplete!: boolean;
 
   get sharedClasses() {
     return "block text-sm w-full py-2 px-3 border-2 border-gray-400 text-slate-800 rounded-lg shadow-sm focus:outline-none focus:border-rose-500 bg-white focus:border-lime-600";
