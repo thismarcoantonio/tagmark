@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import SaveCardView from "@/views/SaveCardView.vue";
+import SaveBookmarkView from "@/views/SaveBookmarkView.vue";
 import TagListView from "@/views/TagListView.vue";
 
 Vue.use(VueRouter);
@@ -13,9 +13,9 @@ const routes: RouteConfig[] = [
     component: HomeView,
   },
   {
-    path: "/new-card",
-    name: "save-card",
-    component: SaveCardView,
+    path: "/new-bookmark",
+    name: "save-bookmark",
+    component: SaveBookmarkView,
   },
   {
     path: "/tags",
