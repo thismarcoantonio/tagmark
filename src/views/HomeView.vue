@@ -2,13 +2,13 @@
   <div class="home">
     <search-box />
     <div class="grid gap-4 my-8">
-      <card-item
-        :card="card"
-        :key="card.id"
-        :favorite="card.favorite"
-        :tags="tags.filter((tag) => card.tags.includes(tag.id))"
-        @toggle-favorite="handleFavorite(card)"
-        v-for="card in cards"
+      <bookmark-item
+        :bookmark="bookmark"
+        :key="bookmark.id"
+        :favorite="bookmark.favorite"
+        :tags="tags.filter((tag) => bookmark.tags.includes(tag.id))"
+        @toggle-favorite="handleFavorite(bookmark)"
+        v-for="bookmark in bookmarks"
       />
     </div>
   </div>
@@ -18,22 +18,22 @@
 import { Vue, Component } from "vue-property-decorator";
 import { Action, State } from "vuex-class";
 import { Tag } from "@/declarations/Tag";
-import { Card } from "@/declarations/Card";
+import { Bookmark } from "@/declarations/Bookmark";
 import SearchBox from "@/components/SearchBox.vue";
-import CardItem from "@/components/CardItem.vue";
+import BookmarkItem from "@/components/BookmarkItem.vue";
 import { ActionMethod } from "vuex";
 
 @Component({
   components: {
     SearchBox,
-    CardItem,
+    BookmarkItem,
   },
 })
 export default class HomeView extends Vue {
-  @State("cards", { namespace: "card" }) cards!: Card[];
+  @State("bookmarks", { namespace: "bookmark" }) bookmarks!: Bookmark[];
   @State("tags", { namespace: "tag" }) tags!: Tag[];
 
-  @Action("setFavorite", { namespace: "card" })
+  @Action("setFavorite", { namespace: "bookmark" })
   setFavorite!: ActionMethod;
 
   handleFavorite({ id, favorite }: { id: string; favorite: boolean }) {

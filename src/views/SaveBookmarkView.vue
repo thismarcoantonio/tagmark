@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title h="h2">Create new Card</page-title>
+    <page-title h="h2">Create new Bookmark</page-title>
     <form @submit.prevent="handleSubmit">
       <text-field v-model="values.name" name="name" label="Name" class="mb-4" />
       <text-field
@@ -33,7 +33,7 @@ import { Vue, Component } from "vue-property-decorator";
 import { State, Action } from "vuex-class";
 import { ActionMethod } from "vuex";
 import { Tag } from "@/declarations/Tag";
-import { Card } from "@/declarations/Card";
+import { Bookmark } from "@/declarations/Bookmark";
 import PageTitle from "@/components/PageTitle.vue";
 import TextField from "@/components/TextField.vue";
 import SelectField from "@/components/SelectField.vue";
@@ -47,14 +47,14 @@ import PrimaryButton from "@/components/PrimaryButton.vue";
     PrimaryButton,
   },
 })
-export default class SaveCardView extends Vue {
+export default class SaveBookmarkView extends Vue {
   @State("tags", { namespace: "tag" })
   tags!: Tag[];
 
-  @Action("setCard", { namespace: "card" })
-  actionSetCard!: ActionMethod;
+  @Action("setBookmark", { namespace: "bookmark" })
+  actionSetBookmark!: ActionMethod;
 
-  values: Pick<Card, "name" | "description" | "link"> & {
+  values: Pick<Bookmark, "name" | "description" | "link"> & {
     tags: { label: string; value: string }[];
   } = {
     name: "",
@@ -64,7 +64,7 @@ export default class SaveCardView extends Vue {
   };
 
   async handleSubmit() {
-    await this.actionSetCard({
+    await this.actionSetBookmark({
       ...this.values,
       tags: this.values.tags.map((tag) => tag.value),
     });

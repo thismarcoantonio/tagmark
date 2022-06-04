@@ -1,6 +1,6 @@
 import { Tag } from "@/declarations/Tag";
 
-export type Card = {
+export type Bookmark = {
   id: string;
   name: string;
   description: string;
