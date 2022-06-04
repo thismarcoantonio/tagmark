@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <search-box />
-    <div class="grid gap-4 my-8">
+    <div v-if="bookmarks.length" class="grid gap-4 my-8">
       <bookmark-item
         :bookmark="bookmark"
         :key="bookmark.id"
@@ -10,6 +10,12 @@
         @toggle-favorite="handleFavorite(bookmark)"
         v-for="bookmark in bookmarks"
       />
+    </div>
+    <div class="mt-4 text-slate-700" v-if="!bookmarks.length">
+      Looks like you didn't create any Bookmark yet,
+      <router-link class="text-lime-600 underline" to="/new-bookmark">
+        go ahead and create your first!
+      </router-link>
     </div>
   </div>
 </template>
