@@ -2,14 +2,18 @@
   <div class="home">
     <search-box />
     <div v-if="bookmarks.length" class="grid gap-4 my-8">
-      <bookmark-item
-        :bookmark="bookmark"
+      <router-link
         :key="bookmark.id"
-        :favorite="bookmark.favorite"
-        :tags="tags.filter((tag) => bookmark.tags.includes(tag.id))"
-        @toggle-favorite="handleFavorite(bookmark)"
+        :to="`/bookmark/${bookmark.id}`"
         v-for="bookmark in bookmarks"
-      />
+      >
+        <bookmark-item
+          :bookmark="bookmark"
+          :favorite="bookmark.favorite"
+          :tags="tags.filter((tag) => bookmark.tags.includes(tag.id))"
+          @toggle-favorite="handleFavorite(bookmark)"
+        />
+      </router-link>
     </div>
     <div class="mt-4 text-slate-700" v-if="!bookmarks.length">
       Looks like you didn't create any Bookmark yet,
@@ -23,11 +27,11 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { Action, State } from "vuex-class";
+import { ActionMethod } from "vuex";
 import { Tag } from "@/declarations/Tag";
 import { Bookmark } from "@/declarations/Bookmark";
 import SearchBox from "@/components/SearchBox.vue";
 import BookmarkItem from "@/components/BookmarkItem.vue";
-import { ActionMethod } from "vuex";
 
 @Component({
   components: {

@@ -1,7 +1,7 @@
 <template>
   <article class="w-full border border-gray-300 rounded bg-white p-4 relative">
     <h2 class="font-bold text-xl mb-2">{{ bookmark.name }}</h2>
-    <button class="absolute top-4 right-4" @click="handleFavorite">
+    <button class="absolute top-4 right-4" @click.prevent="handleFavorite">
       <remix-icon icon="star" :fill="favorite" />
     </button>
     <ul>
