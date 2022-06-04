@@ -11,7 +11,7 @@
         v-model="newTagValue"
         placeholder="Create new tag"
       />
-      <primary-button type="submit">Create</primary-button>
+      <primary-button :loading="loading" type="submit">Create</primary-button>
     </form>
     <ul>
       <tag-list-item :tag="tag" :key="tag.id" v-for="tag in tags" />
@@ -39,6 +39,7 @@ import PrimaryButton from "@/components/PrimaryButton.vue";
 })
 export default class TagListView extends Vue {
   newTagValue = "";
+  loading = false;
 
   @State("tags", { namespace: "tag" })
   tags!: Tag[];
@@ -46,9 +47,11 @@ export default class TagListView extends Vue {
   @Action("saveTag", { namespace: "tag" })
   saveTag!: ActionMethod;
 
-  handleCreate() {
+  async handleCreate() {
     if (!this.newTagValue) return null;
-    this.saveTag({ name: this.newTagValue });
+    this.loading = true;
+    await this.saveTag({ name: this.newTagValue });
+    this.loading = false;
     this.newTagValue = "";
   }
 }
