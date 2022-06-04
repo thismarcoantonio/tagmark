@@ -23,7 +23,7 @@
         v-model="values.tags"
         :options="tags.map((tag) => ({ label: tag.name, value: tag.id }))"
       />
-      <primary-button type="submit">Submit</primary-button>
+      <primary-button type="submit" :loading="loading">Submit</primary-button>
     </form>
   </div>
 </template>
@@ -63,11 +63,15 @@ export default class SaveBookmarkView extends Vue {
     tags: [],
   };
 
+  loading = false;
+
   async handleSubmit() {
+    this.loading = true;
     await this.actionSetBookmark({
       ...this.values,
       tags: this.values.tags.map((tag) => tag.value),
     });
+    this.loading = false;
     this.$router.push("/");
   }
 }
