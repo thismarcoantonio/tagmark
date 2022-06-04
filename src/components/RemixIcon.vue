@@ -1,7 +1,7 @@
 <template>
   <svg
-    width="24"
-    height="24"
+    :width="size"
+    :height="size"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -68,6 +68,7 @@ import { IconTypes } from "@/declarations/IconTypes";
 export default class RemixIcon extends Vue {
   @Prop({ required: true }) icon!: IconTypes;
   @Prop() fill!: boolean;
+  @Prop({ default: 24 }) size!: number;
 
   IconTypes = IconTypes;
 }
