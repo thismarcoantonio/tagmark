@@ -5,4 +5,6 @@ export enum IconTypes {
   edit = "edit",
   save = "save",
   "chevron-down" = "chevron-down",
+  "file-copy" = "file-copy",
+  loader = "loader",
 }
