@@ -63,11 +63,12 @@ export default class SaveCardView extends Vue {
     tags: [],
   };
 
-  handleSubmit() {
-    this.actionSetCard({
+  async handleSubmit() {
+    await this.actionSetCard({
       ...this.values,
       tags: this.values.tags.map((tag) => tag.value),
     });
+    this.$router.push("/");
   }
 }
 </script>
