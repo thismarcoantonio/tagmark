@@ -47,3 +47,22 @@ export function updateBookmark({
     }, 2000);
   });
 }
+
+export function deleteBookmark({ id }: { id: string }): Promise<Bookmark[]> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const bookmarks = getBookmarks();
+        const updatedBookmarks = bookmarks.filter(
+          (bookmark) => bookmark.id !== id
+        );
+        setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
+        resolve(updatedBookmarks);
+      } catch (error) {
+        return reject(
+          "An error ocurred trying to delete your bookmark, try again later"
+        );
+      }
+    }, 2000);
+  });
+}

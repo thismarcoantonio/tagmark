@@ -4,6 +4,7 @@ import {
   getBookmarks,
   createBookmark,
   updateBookmark,
+  deleteBookmark,
 } from "@/services/bookmark";
 
 interface State {
@@ -28,12 +29,19 @@ const Bookmark: Module<State, RootState> = {
       const bookmarks = await updateBookmark(payload);
       context.commit("SET_BOOKMARKS", bookmarks);
     },
+    async deleteBookmark(context, payload: { id: string }) {
+      const bookmarks = await deleteBookmark(payload);
+      context.commit("DELETE_BOOKMARK", bookmarks);
+    },
   },
   mutations: {
     SET_BOOKMARK(state, payload) {
       state.bookmarks = [...state.bookmarks, payload];
     },
     SET_BOOKMARKS(state, payload) {
+      state.bookmarks = payload;
+    },
+    DELETE_BOOKMARK(state, payload) {
       state.bookmarks = payload;
     },
   },
