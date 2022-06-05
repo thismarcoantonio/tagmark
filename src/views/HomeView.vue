@@ -10,7 +10,7 @@
         <bookmark-item
           :bookmark="bookmark"
           :favorite="bookmark.favorite"
-          :tags="tags.filter((tag) => bookmark.tags.includes(tag.id))"
+          :tags="getBookmarkTags(bookmark)"
           @toggle-favorite="handleFavorite(bookmark)"
         />
       </router-link>
@@ -40,11 +40,18 @@ import BookmarkItem from "@/components/BookmarkItem.vue";
   },
 })
 export default class HomeView extends Vue {
-  @State("bookmarks", { namespace: "bookmark" }) bookmarks!: Bookmark[];
-  @State("tags", { namespace: "tag" }) tags!: Tag[];
+  @State("bookmarks", { namespace: "bookmark" })
+  bookmarks!: Bookmark[];
+
+  @State("tags", { namespace: "tag" })
+  tags!: Tag[];
 
   @Action("setFavorite", { namespace: "bookmark" })
   setFavorite!: ActionMethod;
+
+  getBookmarkTags(bookmark: Bookmark): Tag[] {
+    return this.tags.filter((tag) => bookmark.tags.includes(tag.id));
+  }
 
   handleFavorite({ id, favorite }: { id: string; favorite: boolean }) {
     this.setFavorite({ id, favorite: !favorite });

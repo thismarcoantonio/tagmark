@@ -14,8 +14,13 @@ const routes: RouteConfig[] = [
     component: HomeView,
   },
   {
-    path: "/new-bookmark",
-    name: "save-bookmark",
+    path: "/bookmark/create",
+    name: "create-bookmark",
+    component: SaveBookmarkView,
+  },
+  {
+    path: "/bookmark/:id/edit",
+    name: "edit-bookmark",
     component: SaveBookmarkView,
   },
   {

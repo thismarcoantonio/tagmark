@@ -21,9 +21,13 @@ const Bookmark: Module<State, RootState> = {
     bookmarks: getBookmarks(),
   },
   actions: {
-    async setBookmark(context, payload: Bookmark) {
+    async setBookmark(context, payload: Omit<Bookmark, "id">) {
       const bookmark = await createBookmark(payload);
       context.commit("SET_BOOKMARK", bookmark);
+    },
+    async updateBookmark(context, payload: Bookmark) {
+      const bookmark = await updateBookmark(payload);
+      context.commit("SET_BOOKMARKS", bookmark);
     },
     async setFavorite(context, payload: { id: string; favorite: boolean }) {
       const bookmarks = await updateBookmark(payload);

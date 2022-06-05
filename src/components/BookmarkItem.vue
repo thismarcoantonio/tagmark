@@ -22,6 +22,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { Bookmark } from "@/declarations/Bookmark";
+import { Tag } from "@/declarations/Tag";
 import RemixIcon from "@/components/RemixIcon.vue";
 
 @Component({
@@ -31,7 +32,7 @@ import RemixIcon from "@/components/RemixIcon.vue";
 })
 export default class BookmarkItem extends Vue {
   @Prop({ required: true }) bookmark!: Bookmark;
-  @Prop({ required: true }) tags!: { id: string; name: string }[];
+  @Prop({ required: true }) tags!: Tag[];
   @Prop() favorite!: boolean;
 
   handleFavorite() {

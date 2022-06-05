@@ -10,6 +10,7 @@
     <vue-select
       :id="name"
       :name="name"
+      :value="value"
       :multiple="true"
       :options="options"
       class="select-field"
