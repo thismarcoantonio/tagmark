@@ -7,4 +7,6 @@ export enum IconTypes {
   "chevron-down" = "chevron-down",
   "file-copy" = "file-copy",
   loader = "loader",
+  more = "more",
+  delete = "delete",
 }
