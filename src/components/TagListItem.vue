@@ -7,9 +7,10 @@
       </button>
     </div>
     <form v-if="edit" class="flex items-center" @submit.prevent="handleSubmit">
-      <text-field name="nameField" :value="tag.name" readonly />
+      <text-field name="nameField" v-model="value" />
       <button type="submit" class="ml-auto">
-        <remix-icon icon="save" />
+        <remix-icon v-if="!loading" icon="save" />
+        <loader-icon v-if="loading" />
       </button>
     </form>
   </li>
@@ -22,15 +23,19 @@ import { Action } from "vuex-class";
 import { Tag } from "@/declarations/Tag";
 import TextField from "@/components/TextField.vue";
 import RemixIcon from "@/components/RemixIcon.vue";
+import LoaderIcon from "@/components/LoaderIcon.vue";
 
 @Component({
   components: {
     TextField,
     RemixIcon,
+    LoaderIcon,
   },
 })
 export default class TagListItem extends Vue {
   edit = false;
+  loading = false;
+  value = "";
 
   @Prop({ required: true })
   tag!: Tag;
@@ -42,10 +47,15 @@ export default class TagListItem extends Vue {
     this.edit = true;
   }
 
-  async handleSubmit($event: Event) {
-    const { value } = ($event?.target as HTMLFormElement).nameField;
-    await this.saveTag({ ...this.tag, name: value });
+  async handleSubmit() {
+    this.loading = true;
+    await this.saveTag({ ...this.tag, name: this.value });
+    this.loading = false;
     this.edit = false;
+  }
+
+  mounted() {
+    this.value = this.tag.name;
   }
 }
 </script>
