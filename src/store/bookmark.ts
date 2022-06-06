@@ -1,5 +1,6 @@
 import { Module } from "vuex";
 import { Bookmark } from "@/declarations/Bookmark";
+import { RootState } from "@/declarations/RootState";
 import {
   getBookmarks,
   createBookmark,
@@ -7,18 +8,25 @@ import {
   deleteBookmark,
 } from "@/services/bookmark";
 
-interface State {
+export interface State {
   bookmarks: Bookmark[];
-}
-
-interface RootState {
-  root: boolean;
 }
 
 const Bookmark: Module<State, RootState> = {
   namespaced: true,
   state: {
     bookmarks: getBookmarks(),
+  },
+  getters: {
+    bookmarkList(state, getters, { filter }) {
+      return state.bookmarks.filter(({ name, description }) => {
+        const searchTerm = filter.search.toLowerCase();
+        return (
+          name.toLowerCase().includes(searchTerm) ||
+          description.toLowerCase().includes(searchTerm)
+        );
+      });
+    },
   },
   actions: {
     async setBookmark(context, payload: Omit<Bookmark, "id">) {

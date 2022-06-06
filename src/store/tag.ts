@@ -1,13 +1,10 @@
 import { Module } from "vuex";
 import { Tag } from "@/declarations/Tag";
+import { RootState } from "@/declarations/RootState";
 import { getTags, createTag, updateTag } from "@/services/tag";
 
-interface State {
+export interface State {
   tags: Tag[];
-}
-
-interface RootState {
-  root: boolean;
 }
 
 const Tag: Module<State, RootState> = {
