@@ -88,12 +88,15 @@ export default class SaveBookmarkView extends Vue {
         ...values,
         id: this.$route.params.id,
       });
-    } else {
-      await this.actionSetBookmark(values);
+      this.$router.push(`/bookmark/${this.$route.params.id}`);
+      this.loading = false;
+      return null;
     }
 
-    this.loading = false;
+    await this.actionSetBookmark(values);
     this.$router.push("/");
+    this.loading = false;
+    return null;
   }
 
   created() {
