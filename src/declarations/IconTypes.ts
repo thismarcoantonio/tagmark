@@ -9,4 +9,5 @@ export enum IconTypes {
   loader = "loader",
   more = "more",
   delete = "delete",
+  search = "search",
 }
