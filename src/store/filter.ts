@@ -14,7 +14,13 @@ const Filter: Module<State, RootState> = {
   actions: {
     setSearch(context, payload: string) {
       context.commit("SET_SEARCH", payload);
-      router.push({ path: "/", query: { search: payload } });
+
+      if (router.app?.$route?.query?.search !== payload) {
+        router.push({
+          path: "/",
+          ...(payload && { query: { search: payload } }),
+        });
+      }
     },
   },
   mutations: {

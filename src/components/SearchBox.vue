@@ -51,5 +51,13 @@ export default class SearchBox extends Vue {
   handleSubmit() {
     this.setSearch(this.value);
   }
+
+  mounted() {
+    const { search } = this.$route.query as { search: string };
+    if (search) {
+      this.value = search;
+      this.setSearch(search);
+    }
+  }
 }
 </script>
