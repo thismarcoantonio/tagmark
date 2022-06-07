@@ -80,12 +80,10 @@ export function deleteBookmarkTag({ id }: { id: string }): Promise<Bookmark[]> {
     setTimeout(() => {
       try {
         const bookmarks = getBookmarks();
-        console.log("BEFORE", bookmarks);
         const updatedBookmarks = bookmarks.map((bookmark) => ({
           ...bookmark,
           tags: bookmark.tags.filter((tagId) => tagId !== id),
         }));
-        console.log("AFTER", updatedBookmarks);
         setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
         resolve(updatedBookmarks);
       } catch (error) {
