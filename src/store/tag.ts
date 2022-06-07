@@ -13,13 +13,9 @@ const Tag: Module<State, RootState> = {
     tags: getTags(),
   },
   actions: {
-    async saveTag({ commit, state }, payload) {
-      if (payload.id) {
-        const tags = await updateTag(payload);
-        return commit("SET_TAGS", tags);
-      }
-      const tag = await createTag(payload);
-      return commit("SET_TAGS", [...state.tags, tag]);
+    async saveTag({ commit }, payload) {
+      const tags = await (payload.id ? updateTag(payload) : createTag(payload));
+      return commit("SET_TAGS", tags);
     },
     async deleteTag({ commit, dispatch }, payload: { id: string }) {
       const tags = await deleteTag(payload);

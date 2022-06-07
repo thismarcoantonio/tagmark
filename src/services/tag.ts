@@ -8,15 +8,15 @@ export function getTags(): Tag[] {
   return getItem<Tag[]>(STORAGE_KEY) || [];
 }
 
-export function createTag(data: Omit<Tag, "id">): Promise<Tag> {
+export function createTag(data: Omit<Tag, "id">): Promise<Tag[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         const id = uuid();
         const tags = getTags();
-        const newTag = { id, ...data };
-        setItem<Tag[]>(STORAGE_KEY, tags.concat(newTag));
-        resolve(newTag);
+        const updatedTags = [{ id, ...data }, ...tags];
+        setItem<Tag[]>(STORAGE_KEY, updatedTags);
+        resolve(updatedTags);
       } catch (error) {
         return reject(
           "An error ocurred trying to create your tag, try again later"

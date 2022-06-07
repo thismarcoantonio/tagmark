@@ -17,12 +17,12 @@ beforeEach(() => {
 
 describe("tag", () => {
   it("creates tag correctly", async () => {
-    const tag = await createTag({ name: "My tag" });
-    expect(tag).toEqual({ name: "My tag", id: expect.any(String) });
+    const tags = await createTag({ name: "My tag" });
+    expect(tags).toEqual([{ name: "My tag", id: expect.any(String) }]);
   });
 
   it("updates tag correctly", async () => {
-    const tag = await createTag({ name: "Original tag" });
+    const [tag] = await createTag({ name: "Original tag" });
     expect(tag).toEqual({ name: "Original tag", id: expect.any(String) });
     const tags = await updateTag({ id: tag.id, name: "Updated tag" });
     expect(tags).toEqual([{ name: "Updated tag", id: tag.id }]);
@@ -36,9 +36,9 @@ describe("tag", () => {
     ]);
     const tags = getTags();
     expect(tags).toEqual([
-      { id: expect.any(String), name: "Tag 01" },
-      { id: expect.any(String), name: "Tag 02" },
       { id: expect.any(String), name: "Tag 03" },
+      { id: expect.any(String), name: "Tag 02" },
+      { id: expect.any(String), name: "Tag 01" },
     ]);
   });
 });
