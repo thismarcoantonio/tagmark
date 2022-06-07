@@ -42,3 +42,18 @@ export function updateTag(tag: Tag): Promise<Tag[]> {
     }, 2000);
   });
 }
+
+export function deleteTag({ id }: { id: string }): Promise<Tag[]> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const tags = getTags();
+        const updatedTags = tags.filter((currentTag) => currentTag.id !== id);
+        setItem<Tag[]>(STORAGE_KEY, updatedTags);
+        resolve(updatedTags);
+      } catch (error) {
+        return reject("An error ocurred deleting your tag, try again later");
+      }
+    }, 2000);
+  });
+}

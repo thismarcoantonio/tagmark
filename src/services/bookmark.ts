@@ -74,3 +74,25 @@ export function deleteBookmark({ id }: { id: string }): Promise<Bookmark[]> {
     }, 2000);
   });
 }
+
+export function deleteBookmarkTag({ id }: { id: string }): Promise<Bookmark[]> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const bookmarks = getBookmarks();
+        console.log("BEFORE", bookmarks);
+        const updatedBookmarks = bookmarks.map((bookmark) => ({
+          ...bookmark,
+          tags: bookmark.tags.filter((tagId) => tagId !== id),
+        }));
+        console.log("AFTER", updatedBookmarks);
+        setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
+        resolve(updatedBookmarks);
+      } catch (error) {
+        return reject(
+          "An error ocurred trying to delete tag from your bookmark, try again later"
+        );
+      }
+    }, 2000);
+  });
+}

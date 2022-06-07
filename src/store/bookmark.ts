@@ -6,6 +6,7 @@ import {
   createBookmark,
   updateBookmark,
   deleteBookmark,
+  deleteBookmarkTag,
 } from "@/services/bookmark";
 
 export interface State {
@@ -44,6 +45,10 @@ const Bookmark: Module<State, RootState> = {
     async deleteBookmark(context, payload: { id: string }) {
       const bookmarks = await deleteBookmark(payload);
       context.commit("DELETE_BOOKMARK", bookmarks);
+    },
+    async deleteBookmarksTag(context, payload: { id: string }) {
+      const bookmarks = await deleteBookmarkTag(payload);
+      context.commit("SET_BOOKMARKS", bookmarks);
     },
   },
   mutations: {
