@@ -4,8 +4,14 @@ import { Bookmark } from "@/declarations/Bookmark";
 
 const STORAGE_KEY = "tagmark-bookmarks";
 
+function sortByFavorite(prev: Bookmark, next: Bookmark) {
+  if (prev.favorite === next.favorite) return 0;
+  return prev.favorite ? -1 : 1;
+}
+
 export function getBookmarks(): Bookmark[] {
-  return getItem<Bookmark[]>(STORAGE_KEY) || [];
+  const bookmarks = getItem<Bookmark[]>(STORAGE_KEY) || [];
+  return bookmarks.sort(sortByFavorite);
 }
 
 export function createBookmark(data: Omit<Bookmark, "id">): Promise<Bookmark> {
@@ -34,9 +40,11 @@ export function updateBookmark({
     setTimeout(() => {
       try {
         const bookmarks = getBookmarks();
-        const updatedBookmarks = bookmarks.map((bookmark) =>
-          bookmark.id === id ? { ...bookmark, ...data } : bookmark
-        );
+        const updatedBookmarks = bookmarks
+          .map((bookmark) =>
+            bookmark.id === id ? { ...bookmark, ...data } : bookmark
+          )
+          .sort(sortByFavorite);
         setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
         resolve(updatedBookmarks);
       } catch (error) {
@@ -53,9 +61,9 @@ export function deleteBookmark({ id }: { id: string }): Promise<Bookmark[]> {
     setTimeout(() => {
       try {
         const bookmarks = getBookmarks();
-        const updatedBookmarks = bookmarks.filter(
-          (bookmark) => bookmark.id !== id
-        );
+        const updatedBookmarks = bookmarks
+          .filter((bookmark) => bookmark.id !== id)
+          .sort(sortByFavorite);
         setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
         resolve(updatedBookmarks);
       } catch (error) {
