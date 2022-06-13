@@ -1,5 +1,9 @@
 <template>
-  <component class="text-xl font-semibold mb-6 text-gray-900" :is="h">
+  <component
+    :is="h"
+    :class="{ 'mb-6': !noMargins }"
+    class="text-xl font-semibold text-gray-900"
+  >
     <slot />
   </component>
 </template>
@@ -19,5 +23,7 @@ enum HeadingLevel {
 @Component
 export default class PageTitle extends Vue {
   @Prop() h!: HeadingLevel;
+
+  @Prop() noMargins!: boolean;
 }
 </script>

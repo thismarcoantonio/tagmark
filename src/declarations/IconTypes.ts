@@ -10,4 +10,5 @@ export enum IconTypes {
   more = "more",
   delete = "delete",
   search = "search",
+  filter = "filter",
 }

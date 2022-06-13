@@ -1,6 +1,7 @@
 import { Module } from "vuex";
 import { Bookmark } from "@/declarations/Bookmark";
 import { RootState } from "@/declarations/RootState";
+import { filterByName, filterByTags } from "@/utils/bookmarkFilter";
 import {
   getBookmarks,
   createBookmark,
@@ -20,13 +21,11 @@ const Bookmark: Module<State, RootState> = {
   },
   getters: {
     bookmarkList(state, getters, { filter }) {
-      return state.bookmarks.filter(({ name, description }) => {
-        const searchTerm = filter.search.toLowerCase();
-        return (
-          name.toLowerCase().includes(searchTerm) ||
-          description.toLowerCase().includes(searchTerm)
-        );
-      });
+      return state.bookmarks.filter(
+        (bookmark) =>
+          filterByName(bookmark, filter.search) &&
+          filterByTags(bookmark, filter.activeTags)
+      );
     },
   },
   actions: {

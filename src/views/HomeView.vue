@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <search-box :readonly="true" />
-    <div v-if="bookmarks.length" class="grid gap-4 my-8">
+    <filter-search />
+    <filter-tags />
+    <div v-if="bookmarks.length" class="grid gap-4 mb-8">
       <template v-if="bookmarkList.length">
         <router-link
           :key="bookmark.id"
@@ -36,12 +37,14 @@ import { Action, State, Getter } from "vuex-class";
 import { ActionMethod } from "vuex";
 import { Tag } from "@/declarations/Tag";
 import { Bookmark } from "@/declarations/Bookmark";
-import SearchBox from "@/components/SearchBox.vue";
+import FilterSearch from "@/components/FilterSearch.vue";
+import FilterTags from "@/components/FilterTags.vue";
 import BookmarkItem from "@/components/BookmarkItem.vue";
 
 @Component({
   components: {
-    SearchBox,
+    FilterSearch,
+    FilterTags,
     BookmarkItem,
   },
 })
