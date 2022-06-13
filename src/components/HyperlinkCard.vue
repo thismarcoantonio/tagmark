@@ -4,7 +4,7 @@
     target="_blank"
     class="flex items-center justify-between text-sky-600 bg-gray-200 rounded-md p-3"
   >
-    <span>{{ link }}</span>
+    <span class="truncate pr-4">{{ link }}</span>
     <input type="hidden" :value="link" />
     <button @click.prevent="handleCopy" class="bg-white p-1 rounded">
       <remix-icon icon="file-copy" />
