@@ -18,8 +18,10 @@
         </router-link>
       </template>
       <span class="text-slate-700" v-if="!bookmarkList.length">
-        Your active filters didn't match any bookmark. Update or clear your
-        filters.
+        Your active filters didn't match any bookmark. Update or
+        <button class="text-lime-600 underline" @click="clearFilters">
+          clear your filters.
+        </button>
       </span>
     </div>
     <div class="mt-4 text-slate-700" v-if="!bookmarks.length">
@@ -34,7 +36,6 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { Action, State, Getter } from "vuex-class";
-import { ActionMethod } from "vuex";
 import { Tag } from "@/declarations/Tag";
 import { Bookmark } from "@/declarations/Bookmark";
 import FilterSearch from "@/components/FilterSearch.vue";
@@ -59,7 +60,10 @@ export default class HomeView extends Vue {
   bookmarkList!: Bookmark[];
 
   @Action("setFavorite", { namespace: "bookmark" })
-  setFavorite!: ActionMethod;
+  setFavorite!: (payload: { id: string; favorite: boolean }) => Promise<void>;
+
+  @Action("clearFilters", { namespace: "filter" })
+  clearFilters!: () => Promise<void>;
 
   getBookmarkTags(bookmark: Bookmark): Tag[] {
     return this.tags.filter((tag) => bookmark.tags.includes(tag.id));

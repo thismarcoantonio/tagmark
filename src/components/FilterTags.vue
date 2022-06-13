@@ -14,7 +14,16 @@
     <main-modal :open="modalOpen" @close="handleModalToggle">
       <template #title><span class="text-lime-600">Tag</span>Mark</template>
       <search-box v-model="searchValue" class="mt-4 mb-8" label="Search tag" />
-      <p class="mb-4 text-gray-600">Tags ({{ totalTagsLabel }})</p>
+      <div class="mb-4 flex justify-between items-center">
+        <span class="text-gray-600">Tags ({{ totalTagsLabel }})</span>
+        <button
+          v-if="activeTags.length"
+          class="text-lime-600 underline"
+          @click="clearFilters"
+        >
+          Clear filters
+        </button>
+      </div>
       <ul>
         <text-badge
           v-for="tag in visibleTags"
@@ -61,6 +70,9 @@ export default class FilterTags extends Vue {
 
   @Action("removeActiveTag", { namespace: "filter" })
   removeActiveTag!: (payload: string) => Promise<void>;
+
+  @Action("clearFilters", { namespace: "filter" })
+  clearFilters!: () => Promise<void>;
 
   get visibleTags() {
     return this.tags.filter((tag) =>

@@ -22,6 +22,9 @@ const Filter: Module<State, RootState> = {
     removeActiveTag(context, payload: string) {
       context.commit("REMOVE_ACTIVE_TAG", payload);
     },
+    clearFilters(context) {
+      context.commit("CLEAR_FILTERS");
+    },
   },
   mutations: {
     SET_SEARCH(state, payload) {
@@ -34,6 +37,9 @@ const Filter: Module<State, RootState> = {
       state.activeTags = state.activeTags.filter(
         (activeTag) => activeTag !== payload
       );
+    },
+    CLEAR_FILTERS(state) {
+      state.activeTags = [];
     },
   },
 };
