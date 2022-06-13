@@ -30,12 +30,12 @@ const Bookmark: Module<State, RootState> = {
   },
   actions: {
     async setBookmark(context, payload: Omit<Bookmark, "id">) {
-      const bookmark = await createBookmark(payload);
-      context.commit("SET_BOOKMARK", bookmark);
+      const bookmarks = await createBookmark(payload);
+      context.commit("SET_BOOKMARKS", bookmarks);
     },
     async updateBookmark(context, payload: Bookmark) {
-      const bookmark = await updateBookmark(payload);
-      context.commit("SET_BOOKMARKS", bookmark);
+      const bookmarks = await updateBookmark(payload);
+      context.commit("SET_BOOKMARKS", bookmarks);
     },
     async setFavorite(context, payload: { id: string; favorite: boolean }) {
       const bookmarks = await updateBookmark(payload);
@@ -51,9 +51,6 @@ const Bookmark: Module<State, RootState> = {
     },
   },
   mutations: {
-    SET_BOOKMARK(state, payload) {
-      state.bookmarks = [...state.bookmarks, payload];
-    },
     SET_BOOKMARKS(state, payload) {
       state.bookmarks = payload;
     },

@@ -14,15 +14,17 @@ export function getBookmarks(): Bookmark[] {
   return bookmarks.sort(sortByFavorite);
 }
 
-export function createBookmark(data: Omit<Bookmark, "id">): Promise<Bookmark> {
+export function createBookmark(
+  data: Omit<Bookmark, "id">
+): Promise<Bookmark[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         const id = uuid();
         const bookmarks = getBookmarks();
-        const newBookmark = { id, ...data };
-        setItem<Bookmark[]>(STORAGE_KEY, bookmarks.concat(newBookmark));
-        resolve(newBookmark);
+        const updatedBookmarks = [{ id, ...data }, ...bookmarks];
+        setItem<Bookmark[]>(STORAGE_KEY, updatedBookmarks);
+        resolve(updatedBookmarks);
       } catch (error) {
         return reject(
           "An error ocurred trying to create your bookmark, try again later"
