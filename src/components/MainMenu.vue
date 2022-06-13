@@ -13,7 +13,7 @@
           <remix-icon icon="close" class="text-lime-600" />
         </button>
       </div>
-      <ul class="pt-2 px-6 pb-6">
+      <ul class="pt-2 px-6">
         <li
           :key="route.label"
           @click="handleClose"
@@ -29,6 +29,22 @@
           </router-link>
         </li>
       </ul>
+      <div class="pt-6 px-6 pb-6">
+        <button
+          class="font-semibold mr-3"
+          @click="handleChangeTranslation('en')"
+          :class="[activeLocale === 'en' ? 'text-lime-600' : 'text-gray-400']"
+        >
+          EN
+        </button>
+        <button
+          class="font-semibold mr-3"
+          @click="handleChangeTranslation('pt')"
+          :class="[activeLocale === 'pt' ? 'text-lime-600' : 'text-gray-400']"
+        >
+          PT
+        </button>
+      </div>
     </nav>
   </div>
 </template>
@@ -36,6 +52,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import RemixIcon from "@/components/RemixIcon.vue";
+import i18n from "@/translation";
 
 @Component({
   components: {
@@ -54,12 +71,22 @@ export default class MainMenu extends Vue {
     this.$emit("close");
   }
 
+  get activeLocale() {
+    return i18n.locale;
+  }
+
   get menuRoutes() {
     return [
-      { to: "/", label: "Home" },
-      { to: "/bookmark/create", label: "Create new Bookmark" },
-      { to: "/tags", label: "Manage tags" },
+      { to: "/", label: this.$t("menu.home") },
+      { to: "/bookmark/create", label: this.$t("menu.newBookmark") },
+      { to: "/tags", label: this.$t("menu.manageTags") },
     ];
+  }
+
+  handleChangeTranslation(locale: "en" | "pt") {
+    if (locale !== i18n.locale) {
+      i18n.locale = locale;
+    }
   }
 }
 </script>
