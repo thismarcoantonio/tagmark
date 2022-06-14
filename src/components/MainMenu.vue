@@ -32,14 +32,14 @@
       <div class="pt-6 px-6 pb-6">
         <button
           class="font-semibold mr-3"
-          @click="handleChangeTranslation('en')"
+          @click="setActiveTranslation('en')"
           :class="[activeLocale === 'en' ? 'text-lime-600' : 'text-gray-400']"
         >
           EN
         </button>
         <button
           class="font-semibold mr-3"
-          @click="handleChangeTranslation('pt')"
+          @click="setActiveTranslation('pt')"
           :class="[activeLocale === 'pt' ? 'text-lime-600' : 'text-gray-400']"
         >
           PT
@@ -52,7 +52,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import RemixIcon from "@/components/RemixIcon.vue";
-import i18n from "@/translation";
+import i18n, { setActiveTranslation } from "@/translation";
 
 @Component({
   components: {
@@ -60,6 +60,8 @@ import i18n from "@/translation";
   },
 })
 export default class MainMenu extends Vue {
+  setActiveTranslation = setActiveTranslation;
+
   @Prop({ required: true }) open!: boolean;
 
   @Watch("open")
@@ -81,12 +83,6 @@ export default class MainMenu extends Vue {
       { to: "/bookmark/create", label: this.$t("menu.newBookmark") },
       { to: "/tags", label: this.$t("menu.manageTags") },
     ];
-  }
-
-  handleChangeTranslation(locale: "en" | "pt") {
-    if (locale !== i18n.locale) {
-      i18n.locale = locale;
-    }
   }
 }
 </script>
