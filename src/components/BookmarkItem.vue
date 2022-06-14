@@ -4,7 +4,7 @@
     <button class="absolute top-4 right-4" @click.prevent="handleFavorite">
       <remix-icon icon="star" :fill="favorite" />
     </button>
-    <ul>
+    <ul v-if="tags.length">
       <li
         :key="tag.id"
         v-for="tag in tags"

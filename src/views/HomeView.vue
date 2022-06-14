@@ -27,7 +27,7 @@
         </i18n>
       </span>
     </div>
-    <div class="mt-4 text-slate-700" v-if="bookmarks.length">
+    <div class="mt-4 text-slate-700" v-if="!bookmarks.length">
       <i18n path="bookmarks.noResults">
         <template #action>
           <router-link class="text-lime-600 underline" to="/bookmark/create">
