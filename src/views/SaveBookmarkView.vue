@@ -1,31 +1,42 @@
 <template>
   <div>
     <page-title h="h2">
-      {{ isEdit ? "Edit Bookmark" : "Create new Bookmark" }}
+      {{
+        isEdit
+          ? $t("bookmarks.editBookmark")
+          : $t("bookmarks.createNewBookmark")
+      }}
     </page-title>
     <form @submit.prevent="handleSubmit">
-      <text-field v-model="values.name" name="name" label="Name" class="mb-4" />
+      <text-field
+        name="name"
+        class="mb-4"
+        v-model="values.name"
+        :label="$t('fields.name')"
+      />
       <text-field
         class="mb-4"
         :multiple="true"
         name="description"
-        label="Description"
         v-model="values.description"
+        :label="$t('fields.description')"
       />
       <text-field
         name="link"
         class="mb-4"
-        label="Main link"
         v-model="values.link"
+        :label="$t('fields.mainLink')"
       />
       <select-field
         class="mb-4"
-        label="Tags"
         name="tags"
         v-model="values.tags"
+        :label="$t('fields.tags')"
         :options="tags.map((tag) => ({ label: tag.name, value: tag.id }))"
       />
-      <primary-button type="submit" :loading="loading">Save</primary-button>
+      <primary-button type="submit" :loading="loading">
+        {{ $t("actions.save") }}
+      </primary-button>
     </form>
   </div>
 </template>

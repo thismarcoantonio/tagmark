@@ -2,7 +2,7 @@
   <div>
     <ul class="mt-8 mb-2 flex items-center justify-end">
       <li v-if="activeTags.length" class="text-sm text-gray-600">
-        {{ activeTags.length }} active tags
+        {{ $tc("filters.activeTags", activeTags.length) }}
       </li>
       <text-badge
         @click="handleModalToggle"
@@ -13,7 +13,11 @@
     </ul>
     <main-modal :open="modalOpen" @close="handleModalToggle">
       <template #title><span class="text-lime-600">Tag</span>Mark</template>
-      <search-box v-model="searchValue" class="mt-4 mb-8" label="Search tag" />
+      <search-box
+        class="mt-4 mb-8"
+        v-model="searchValue"
+        :label="$t('filters.searchTag')"
+      />
       <div class="mb-4 flex justify-between items-center">
         <span class="text-gray-600">Tags ({{ totalTagsLabel }})</span>
         <button
@@ -21,7 +25,7 @@
           class="text-lime-600 underline"
           @click="clearFilters"
         >
-          Clear filters
+          {{ $t("filters.clearFilters") }}
         </button>
       </div>
       <ul>
@@ -82,8 +86,10 @@ export default class FilterTags extends Vue {
 
   get totalTagsLabel() {
     return this.searchValue
-      ? `${this.visibleTags.length} of ${this.tags.length} tags`
-      : `${this.tags.length} tags`;
+      ? this.$tc("filters.visibleOfTags", this.tags.length, {
+          visibleCount: this.visibleTags.length,
+        })
+      : this.$tc("filters.tags", this.tags.length);
   }
 
   isTagActive(tag: Tag) {

@@ -1,8 +1,8 @@
 <template>
   <search-box
     v-model="value"
-    label="Search by title or a tag"
     @submit="handleSubmit"
+    :label="$t('filters.search')"
   />
 </template>
 

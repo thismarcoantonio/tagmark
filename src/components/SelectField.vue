@@ -23,6 +23,11 @@
           class="cursor-pointer"
         />
       </template>
+      <template #no-options>
+        <p class="text-gray-600 py-2">
+          {{ $t("fields.noMatchingOptions") }}
+        </p>
+      </template>
     </vue-select>
   </div>
 </template>

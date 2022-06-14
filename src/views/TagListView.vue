@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title h="h2">Manage Tags</page-title>
+    <page-title h="h2">{{ $t("tags.manageTags") }}</page-title>
     <form
       @submit.prevent="handleCreate"
       class="mb-6 flex justify-between gap-3"
@@ -9,9 +9,11 @@
         name="tag"
         class="w-full"
         v-model="newTagValue"
-        placeholder="Create new tag"
+        :placeholder="$t('tags.createNewTag')"
       />
-      <primary-button :loading="loading" type="submit">Create</primary-button>
+      <primary-button :loading="loading" type="submit">
+        {{ $t("actions.create") }}
+      </primary-button>
     </form>
     <ul>
       <tag-list-item :tag="tag" :key="tag.id" v-for="tag in tags" />

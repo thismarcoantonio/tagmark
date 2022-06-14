@@ -54,8 +54,16 @@ export default class BookmarkView extends Vue {
 
   get menuOptions(): DropdownOption[] {
     return [
-      { key: "edit", label: "Edit Bookmark", icon: IconTypes.edit },
-      { key: "delete", label: "Delete Bookmark", icon: IconTypes.delete },
+      {
+        key: "edit",
+        icon: IconTypes.edit,
+        label: this.$t("bookmarks.editBookmark"),
+      },
+      {
+        key: "delete",
+        icon: IconTypes.delete,
+        label: this.$t("bookmarks.deleteBookmark"),
+      },
     ];
   }
 

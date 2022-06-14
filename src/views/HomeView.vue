@@ -18,17 +18,23 @@
         </router-link>
       </template>
       <span class="text-slate-700" v-if="!bookmarkList.length">
-        Your active filters didn't match any bookmark. Update or
-        <button class="text-lime-600 underline" @click="clearFilters">
-          clear your filters.
-        </button>
+        <i18n path="filters.noResults">
+          <template #action>
+            <button class="text-lime-600 underline" @click="clearFilters">
+              {{ $t("filters.clearYourFilters") }}
+            </button>
+          </template>
+        </i18n>
       </span>
     </div>
-    <div class="mt-4 text-slate-700" v-if="!bookmarks.length">
-      Looks like you didn't create any Bookmark yet,
-      <router-link class="text-lime-600 underline" to="/new-bookmark">
-        go ahead and create your first!
-      </router-link>
+    <div class="mt-4 text-slate-700" v-if="bookmarks.length">
+      <i18n path="bookmarks.noResults">
+        <template #action>
+          <router-link class="text-lime-600 underline" to="/bookmark/create">
+            {{ $t("bookmarks.createYourFirst") }}
+          </router-link>
+        </template>
+      </i18n>
     </div>
   </div>
 </template>
