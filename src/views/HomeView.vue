@@ -2,12 +2,13 @@
   <div class="home">
     <filter-search />
     <filter-tags />
-    <div v-if="bookmarks.length" class="grid gap-4 mb-8">
-      <template v-if="bookmarkList.length">
+    <div v-if="bookmarks.length">
+      <div v-if="bookmarkList.length" class="md:columns-2 lg:columns-3 gap-4">
         <router-link
           :key="bookmark.id"
           :to="`/bookmark/${bookmark.id}`"
           v-for="bookmark in bookmarkList"
+          class="block mb-4 break-inside-avoid"
         >
           <bookmark-item
             :bookmark="bookmark"
@@ -16,7 +17,7 @@
             @toggle-favorite="handleFavorite(bookmark)"
           />
         </router-link>
-      </template>
+      </div>
       <span class="text-slate-700" v-if="!bookmarkList.length">
         <i18n path="filters.noResults">
           <template #action>
