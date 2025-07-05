@@ -3,7 +3,7 @@
     {{ label }}
   </label>
   <div class="relative">
-    <div v-if="$slots.prepend" class="absolute left-2">
+    <div v-if="$slots.prepend" class="absolute left-2 top-2">
       <slot name="prepend" />
     </div>
     <input
