@@ -1,5 +1,7 @@
 <template>
-  <button
+  <component
+    :is="to ? 'router-link' : 'div'"
+    :to="to"
     class="flex cursor-pointer px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
     :class="{
       'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500':
@@ -14,11 +16,14 @@
     <div v-if="$slots.append" class="ml-2">
       <slot name="append" />
     </div>
-  </button>
+  </component>
 </template>
 
 <script lang="ts" setup>
+import type { RouterLinkProps } from 'vue-router';
+
 defineProps<{
+  to?: RouterLinkProps['to'];
   variant?: 'primary' | 'secondary';
 }>();
 </script>
