@@ -1,6 +1,6 @@
 <template>
   <header class="bg-white shadow-sm sticky top-0 z-50 p-4">
-    <h1 class="text-2xl font-bold text-gray-900 mb-4">TagMark</h1>
+    <h1 class="text-2xl text-gray-900 mb-4"><b class="text-primary-600">Tag</b>Mark</h1>
     <menu-dropdown :items="[]" :filter-term="search">
       <text-field v-model="search" placeholder="Search by content or tags...">
         <template #prepend>
@@ -9,17 +9,17 @@
       </text-field>
     </menu-dropdown>
     <div class="mt-2 flex gap-2">
-      <main-button class="justify-center">
+      <main-button class="w-full justify-center">
         <template #prepend>
           <plus-icon />
         </template>
-        Add item
+        Add mark
       </main-button>
-      <main-button class="justify-center" variant="secondary">
+      <main-button class="w-full justify-center" variant="secondary">
         <template #prepend>
           <tag-icon />
         </template>
-        Add item
+        Manage tags
       </main-button>
     </div>
   </header>

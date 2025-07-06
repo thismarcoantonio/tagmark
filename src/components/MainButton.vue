@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex w-full cursor-pointer px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+    class="flex cursor-pointer px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
     :class="{
       'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500':
         !variant || variant === 'primary',
