@@ -8,14 +8,29 @@
         </template>
       </text-field>
     </menu-dropdown>
+    <div class="mt-2 flex gap-2">
+      <main-button class="justify-center">
+        <template #prepend>
+          <plus-icon />
+        </template>
+        Add item
+      </main-button>
+      <main-button class="justify-center" variant="secondary">
+        <template #prepend>
+          <tag-icon />
+        </template>
+        Add item
+      </main-button>
+    </div>
   </header>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { SearchIcon } from 'lucide-vue-next';
+import { SearchIcon, PlusIcon, TagIcon } from 'lucide-vue-next';
 import TextField from '@/components/TextField.vue';
 import MenuDropdown from '@/components/MenuDropdown.vue';
+import MainButton from '@/components/MainButton.vue';
 
 const search = ref('');
 </script>
