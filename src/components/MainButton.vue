@@ -7,6 +7,7 @@
       'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500':
         !variant || variant === 'primary',
       'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500': variant === 'secondary',
+      'w-full justify-center': fullWidth,
     }"
   >
     <div v-if="$slots.prepend" class="mr-2">
@@ -23,6 +24,7 @@
 import type { RouterLinkProps } from 'vue-router';
 
 defineProps<{
+  fullWidth?: boolean;
   to?: RouterLinkProps['to'];
   variant?: 'primary' | 'secondary';
 }>();

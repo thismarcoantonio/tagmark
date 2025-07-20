@@ -18,13 +18,13 @@
       </text-field>
     </menu-dropdown>
     <div class="mt-2 flex gap-2">
-      <main-button to="/create" class="w-full justify-center">
+      <main-button to="/create" full-width>
         <template #prepend>
           <plus-icon />
         </template>
         Add mark
       </main-button>
-      <main-button class="w-full justify-center" variant="secondary">
+      <main-button variant="secondary" full-width>
         <template #prepend>
           <tag-icon />
         </template>
