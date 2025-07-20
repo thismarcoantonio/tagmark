@@ -24,7 +24,7 @@
         </template>
         Add mark
       </main-button>
-      <main-button variant="secondary" full-width>
+      <main-button to="/tags" variant="secondary" full-width>
         <template #prepend>
           <tag-icon />
         </template>

@@ -5,7 +5,7 @@
     description="Create your first mark to get started"
   >
     <template #prepend>
-      <file-text-icon :size="48" class="mb-4" />
+      <file-text-icon :size="48" class="mb-4 text-primary-600" />
     </template>
     <template #append>
       <main-button to="/create">Create first mark</main-button>
