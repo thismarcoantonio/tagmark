@@ -1,5 +1,5 @@
 <template>
-  <main-card title="Manage tags">
+  <main-card title="Manage tags" class="mb-6">
     <get-or-add-tag />
   </main-card>
 
@@ -12,14 +12,19 @@
       <tag-icon :size="48" class="mb-4 text-primary-600" />
     </template>
   </empty-state>
+
+  <template v-if="tagsStore.tags.length">
+    <tag-card v-for="tag in tagsStore.tags" :key="tag.id" :tag="tag" />
+  </template>
 </template>
 
 <script lang="ts" setup>
 import { TagIcon } from 'lucide-vue-next';
+import { useTagsStore } from '@/stores/tags';
 import MainCard from '@/components/MainCard.vue';
 import GetOrAddTag from '@/components/GetOrAddTag.vue';
 import EmptyState from '@/components/EmptyState.vue';
-import { useTagsStore } from '@/stores/tags';
+import TagCard from '@/components/TagCard.vue';
 
 const tagsStore = useTagsStore();
 </script>

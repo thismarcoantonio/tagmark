@@ -7,11 +7,10 @@
     <div v-if="$slots.prepend" class="absolute left-2 top-2">
       <slot name="prepend" />
     </div>
-    <input
+    <text-field-input
       v-model="modelValue"
       :placeholder="placeholder"
       :class="{ 'pl-10': $slots.prepend }"
-      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all pr-4"
     />
     <div v-if="$slots.append" class="absolute right-2 top-2">
       <slot name="append" />
@@ -20,6 +19,8 @@
 </template>
 
 <script lang="ts" setup>
+import TextFieldInput from '@/components/TextFieldInput.vue';
+
 defineProps<{
   label?: string;
   placeholder?: string;

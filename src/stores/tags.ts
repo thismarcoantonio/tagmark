@@ -1,16 +1,27 @@
 import { defineStore } from 'pinia';
 import { useStorage } from '@/helpers/useStorage';
+import type { Tag } from '@/types/Tag';
 
 export const useTagsStore = defineStore('tags', () => {
   const index = useStorage<number>('tags_index', 0);
-  const tags = useStorage<{ id: number; name: string }[]>('tags', []);
+  const tags = useStorage<Tag[]>('tags', []);
 
-  function addTag(value: string) {
+  function addTag(value: Tag['name']) {
     // Increase index to be used as id
     index.value += 1;
-
     tags.value?.push({ id: index.value, name: value.trim() });
   }
 
-  return { tags, addTag };
+  function updateTag(tag: Tag) {
+    const tagIndex = tags.value.findIndex(({ id }) => tag.id === id);
+
+    if (tagIndex >= 0) {
+      tags.value = [...tags.value.slice(0, tagIndex), tag, ...tags.value.slice(tagIndex + 1)];
+      return;
+    }
+
+    throw Error('Tag not found');
+  }
+
+  return { tags, addTag, updateTag };
 });

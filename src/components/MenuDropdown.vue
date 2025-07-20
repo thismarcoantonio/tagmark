@@ -37,7 +37,7 @@ const filteredItems = computed(() => {
   if (!$props.filterTerm) return $props.items;
 
   return $props.items.filter((item) => {
-    const value = typeof item === 'string' ? item : item.value;
+    const value = typeof item === 'string' ? item : item.title;
     return value.toLocaleLowerCase().includes($props.filterTerm!.toLocaleLowerCase());
   });
 });
