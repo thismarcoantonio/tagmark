@@ -8,7 +8,7 @@
     <template #empty>
       <button
         class="w-full text-left px-3 py-2 hover:bg-gray-50 text-primary-600 transition-colors cursor-pointer"
-        @click="() => null"
+        @click="tagsStore.addTag(searchValue)"
       >
         Create tag for "{{ searchValue }}"
       </button>
@@ -17,9 +17,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import MenuDropdown from '@/components/MenuDropdown.vue';
+import { useTagsStore } from '@/stores/tags';
+
+const tagsStore = useTagsStore();
 
 const searchValue = ref('');
-const items: string[] = [];
+
+const items = computed(() =>
+  tagsStore.tags.map(({ id, name }) => ({ value: `${id}`, title: name })),
+);
 </script>

@@ -4,7 +4,7 @@
   </main-card>
 
   <empty-state
-    v-if="!items.length"
+    v-if="!tagsStore.tags.length"
     title="No tags yet"
     description="Create your first tag above to start organizing your saved items"
   >
@@ -19,6 +19,7 @@ import { TagIcon } from 'lucide-vue-next';
 import MainCard from '@/components/MainCard.vue';
 import GetOrAddTag from '@/components/GetOrAddTag.vue';
 import EmptyState from '@/components/EmptyState.vue';
+import { useTagsStore } from '@/stores/tags';
 
-const items: string[] = [];
+const tagsStore = useTagsStore();
 </script>
