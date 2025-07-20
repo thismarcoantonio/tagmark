@@ -1,6 +1,6 @@
 <template>
   <main-card title="Manage tags">
-    <text-field v-model="newValue" placeholder="Add or search tags..." />
+    <get-or-add-tag />
   </main-card>
 
   <empty-state
@@ -15,12 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { TagIcon } from 'lucide-vue-next';
 import MainCard from '@/components/MainCard.vue';
-import TextField from '@/components/TextField.vue';
+import GetOrAddTag from '@/components/GetOrAddTag.vue';
 import EmptyState from '@/components/EmptyState.vue';
 
-const newValue = ref('');
 const items: string[] = [];
 </script>

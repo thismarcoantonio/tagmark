@@ -1,7 +1,7 @@
 <template>
   <label v-if="label" class="block text-sm font-medium text-gray-700 mb-2">
     {{ label }}
-    <span v-if="required"> * </span>
+    <span v-if="required">*</span>
   </label>
   <div class="relative mb-4">
     <div v-if="$slots.prepend" class="absolute left-2 top-2">
