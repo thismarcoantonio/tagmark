@@ -8,6 +8,8 @@
           <save-icon />
         </main-button>
       </template>
+
+      <!-- View state -->
       <template v-else>
         <b>{{ tag.name }}</b>
         <main-button icon variant="secondary" class="ml-auto" @click="handleEdit(tag)">
