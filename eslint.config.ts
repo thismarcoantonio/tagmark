@@ -15,7 +15,7 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
   {
     ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
+    files: ['src/**/*.test.ts'],
   },
   ...pluginOxlint.configs['flat/recommended'],
   skipFormatting,
