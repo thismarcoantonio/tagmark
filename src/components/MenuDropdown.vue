@@ -33,6 +33,10 @@ interface Props {
 
 const $props = defineProps<Props>();
 
+const $emit = defineEmits<{
+  (event: 'select', value: Props['items'][0]): void;
+}>();
+
 const filteredItems = computed(() => {
   if (!$props.filterTerm) return $props.items;
 
@@ -43,6 +47,6 @@ const filteredItems = computed(() => {
 });
 
 function onSelect(item: Props['items'][0]) {
-  console.log(item);
+  $emit('select', item);
 }
 </script>

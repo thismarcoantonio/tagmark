@@ -15,13 +15,18 @@ export const useTagsStore = defineStore('tags', () => {
   function updateTag(tag: Tag) {
     const tagIndex = tags.value.findIndex(({ id }) => tag.id === id);
 
-    if (tagIndex >= 0) {
-      tags.value = [...tags.value.slice(0, tagIndex), tag, ...tags.value.slice(tagIndex + 1)];
-      return;
-    }
+    if (tagIndex < 0) throw Error('Tag not found');
 
-    throw Error('Tag not found');
+    tags.value = [...tags.value.slice(0, tagIndex), tag, ...tags.value.slice(tagIndex + 1)];
   }
 
-  return { tags, addTag, updateTag };
+  function deleteTag(tag: Tag) {
+    const tagIndex = tags.value.findIndex(({ id }) => tag.id === id);
+
+    if (tagIndex < 0) throw Error('Tag not found');
+
+    tags.value = [...tags.value.slice(0, tagIndex), ...tags.value.slice(tagIndex + 1)];
+  }
+
+  return { tags, addTag, updateTag, deleteTag };
 });
