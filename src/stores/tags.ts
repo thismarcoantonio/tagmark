@@ -12,6 +12,10 @@ export const useTagsStore = defineStore('tags', () => {
     tags.value?.push({ id: index.value, name: value.trim() });
   }
 
+  function getTagById(id: Tag['id']) {
+    return tags.value.find((tag) => tag.id === id);
+  }
+
   function updateTag(tag: Tag) {
     const tagIndex = tags.value.findIndex(({ id }) => tag.id === id);
 
@@ -28,5 +32,5 @@ export const useTagsStore = defineStore('tags', () => {
     tags.value = [...tags.value.slice(0, tagIndex), ...tags.value.slice(tagIndex + 1)];
   }
 
-  return { tags, addTag, updateTag, deleteTag };
+  return { tags, addTag, getTagById, updateTag, deleteTag };
 });

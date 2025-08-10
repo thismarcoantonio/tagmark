@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-interface Props {
+export interface Props {
   filterTerm?: string;
   items: string[] | { value: string; title: string }[];
 }

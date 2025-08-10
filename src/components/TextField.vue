@@ -8,6 +8,13 @@
       <slot name="prepend" />
     </div>
     <text-field-input
+      v-if="!multiline"
+      v-model="modelValue"
+      :placeholder="placeholder"
+      :class="{ 'pl-10': $slots.prepend }"
+    />
+    <text-area-input
+      v-else
       v-model="modelValue"
       :placeholder="placeholder"
       :class="{ 'pl-10': $slots.prepend }"
@@ -20,12 +27,14 @@
 
 <script lang="ts" setup>
 import TextFieldInput from '@/components/TextFieldInput.vue';
+import TextAreaInput from '@/components/TextAreaInput.vue';
 
 defineProps<{
   label?: string;
   placeholder?: string;
   required?: boolean;
+  multiline?: boolean;
 }>();
 
-const modelValue = defineModel({ required: true });
+const modelValue = defineModel<string>({ required: true });
 </script>

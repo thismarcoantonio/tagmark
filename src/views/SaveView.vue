@@ -4,7 +4,12 @@
       <main-button>Save</main-button>
     </template>
     <text-field v-model="form.title" label="Title" placeholder="Enter title" required />
-    <text-field v-model="form.title" label="Description" placeholder="Enter description" />
+    <text-field
+      v-model="form.title"
+      label="Description"
+      placeholder="Enter description"
+      multiline
+    />
     <text-field
       v-for="(link, index) in form.links"
       :key="index"
@@ -22,25 +27,36 @@
       </template>
       Add new link
     </main-button>
-    <text-field v-model="form.title" label="Tags" placeholder="Add or search tags..." required />
-    <p class="text-gray-500">
-      Press Enter or comma to add tags. Click suggestions to add existing tags.
-    </p>
+    <get-or-add-tag v-model:search="tag" :inserted-tags="form.tags" class="mb-4" @select="addTag" />
+    <div v-for="tagId in form.tags" :key="tagId">
+      {{ tagId }}
+    </div>
+    <p class="text-gray-500">Click suggestions to add existing tags, or create new tags.</p>
   </main-card>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { PlusIcon, XIcon } from 'lucide-vue-next';
+import GetOrAddTag from '@/components/GetOrAddTag.vue';
 import MainCard from '@/components/MainCard.vue';
 import MainButton from '@/components/MainButton.vue';
 import TextField from '@/components/TextField.vue';
+import type { Tag } from '@/types/Tag';
 
-const form = ref({
+const form = ref<{
+  title: string;
+  description: string;
+  links: string[];
+  tags: number[];
+}>({
   title: '',
   description: '',
   links: [''],
+  tags: [],
 });
+
+const tag = ref('');
 
 function addNewLink() {
   form.value.links.push('');
@@ -48,5 +64,10 @@ function addNewLink() {
 
 function removeLink(index: number) {
   form.value.links = [...form.value.links.slice(0, index), ...form.value.links.slice(index + 1)];
+}
+
+function addTag({ id }: Tag) {
+  form.value.tags.push(id);
+  tag.value = '';
 }
 </script>
