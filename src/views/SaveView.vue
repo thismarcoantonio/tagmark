@@ -28,9 +28,9 @@
       Add new link
     </main-button>
     <get-or-add-tag v-model:search="tag" :inserted-tags="form.tags" class="mb-4" @select="addTag" />
-    <div v-for="tagId in form.tags" :key="tagId">
-      {{ tagId }}
-    </div>
+    <ul class="flex flex-wrap gap-2 mb-4">
+      <main-tag v-for="tagId in form.tags" :key="tagId" :tag-id="tagId" @delete="deleteTag" />
+    </ul>
     <p class="text-gray-500">Click suggestions to add existing tags, or create new tags.</p>
   </main-card>
 </template>
@@ -41,6 +41,7 @@ import { PlusIcon, XIcon } from 'lucide-vue-next';
 import GetOrAddTag from '@/components/GetOrAddTag.vue';
 import MainCard from '@/components/MainCard.vue';
 import MainButton from '@/components/MainButton.vue';
+import MainTag from '@/components/MainTag.vue';
 import TextField from '@/components/TextField.vue';
 import type { Tag } from '@/types/Tag';
 
@@ -69,5 +70,15 @@ function removeLink(index: number) {
 function addTag({ id }: Tag) {
   form.value.tags.push(id);
   tag.value = '';
+}
+
+function deleteTag(tagId: number) {
+  const tagIdIndex = form.value.tags.indexOf(tagId);
+  if (tagIdIndex < 0) return;
+
+  form.value.tags = [
+    ...form.value.tags.slice(0, tagIdIndex),
+    ...form.value.tags.slice(tagIdIndex + 1),
+  ];
 }
 </script>
